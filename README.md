@@ -7,6 +7,6 @@ Take home assignment for ESD 112
 3. Make each author and tag clickable. When clicked, update the gallery to only show images belonging to the specific author or tag clicked.
 
 ## Tech Stack:
-Frontend: React, Bootstrap, Axios
-Backend: Node.js, Express.js
-Testing Library: Jest
+- Frontend: React, Bootstrap, Axios
+- Backend: Node.js, Express.js
+- Testing Libraries: Jest, React Testing Library
