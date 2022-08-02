@@ -3,18 +3,25 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import Gallery from './components/Gallery';
 import reportWebVitals from './reportWebVitals';
-import Home from './components/Home';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+/* 
+  Renders the entire react app into a browser router component
+  BrowserRouter provides us access to the browser's address bar, which can give us information 
+  about the URL parameters or navigate programmatically using the browser's built-in history stack
+*/
 root.render(
-  <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route index element={<Home />}/>
-      </Route>
-    </Routes>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="gallery" element={<Gallery />}/>
+      </Routes>
+    </BrowserRouter>
+  </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
