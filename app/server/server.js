@@ -33,9 +33,9 @@ app.use(cors({
   Author: Thomas Nguyen
 */
 app.get('/api/getPhotos', (req, res) => {
-  
-  // Appended additional parameter: 'nojsoncallback' set to value of 1 because original API URL returned a function wrapper: jsonFlickrFeed
-  // Raw JSON is desired to send to the client, so parameter 'nojsoncallback' and a value of 1 removes jsonFlickrFeed function wrapper
+  // Source: https://www.flickr.com/services/api/response.json.html under Callback Function section (Scroll all the way down to bottom page)
+  // Appended additional parameter: 'nojsoncallback' set to a value of 1 because original API URL returned a function wrapper: 'jsonFlickrFeed'
+  // Raw JSON is desired to send to the client, so parameter 'nojsoncallback' and a value of 1 removes 'jsonFlickrFeed' function wrapper
   axios.get('https://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1')
     .then((response) => {
       // Send over the array of Flickr photo objects contained in the items property to the client

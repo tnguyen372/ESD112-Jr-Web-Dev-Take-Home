@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import Gallery from './components/Gallery';
@@ -16,9 +16,17 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
+      <nav>
+        <h1>Photo Gallery App</h1>
+        {/* <Link to="/">Home</Link> */}
+        <NavLink to="/">Gallery</NavLink>
+        <NavLink to="about">About</NavLink>
+      </nav>
         <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="gallery" element={<Gallery />}/>
+          {/* <Route path="/" element={<App />} /> */}
+          <Route path="/" element={<Gallery />} />
+          
+          
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

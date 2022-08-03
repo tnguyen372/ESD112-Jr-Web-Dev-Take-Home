@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import '../index.css';
 
 const Gallery = () => {
   // State handlers
@@ -21,8 +22,27 @@ const Gallery = () => {
       .catch ((error) => {
         console.log(`Error status: ${error.status}`);
       });
-    
   }
+
+  function displayPhotos() {
+    return photos.map((photo, item) => {
+      return (
+        <div className="photos" key={item}>
+          <img src={photo.media.m} />
+          <div className="photo-content">
+            <h2>Description: {photo.description}</h2>
+          </div>
+          <div className="photo-content">
+            <h4>Author: {photo.author}</h4>
+          </div>
+          <div className="photo-content">
+            <h4>Tags: {photo.tags}</h4>
+          </div>
+        </div>
+      )
+    })
+  }
+
   // When gallery component first mounts and is initially rendered, runs a callback function
   // on all the functions contained within it
   useEffect(() => {
@@ -40,8 +60,13 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Hello World</h1>
+    <div className="container">
+      <h1>Welcome to the photo gallery! Enjoy your stay!</h1>
+      <main>
+        <div className="photo-container">
+          {displayPhotos()}
+        </div>
+      </main>
     </div>
     
   );
