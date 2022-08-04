@@ -1,20 +1,24 @@
+/* Sets the box sizing of all elems */
 * {
   box-sizing: border-box;
 }
 
+/* Set the margin for the body */
 body {
   margin: 0;
 }
 
+/* Styling for nav elem */
 .nav {
-  background-color: darkgoldenrod;
+  background-color: #007c89;
   color: mintcream;
   justify-content: space-between;
-  align-items: stretch;
+  align-items: center;
   gap: 2rem;
   padding: 0 1rem;
 }
 
+/* Specific styling for the anchor elem under the nav elem */
 .nav a {
   display: flex;
   align-items: center;
@@ -22,8 +26,10 @@ body {
   text-decoration: none;
   height: 100%;
   padding: .25rem;
+  font-size: 25px;
 }
 
+/* Specific styling for the ul elem under the nav elem */
 .nav ul {
   display: flex;
   padding: 0;
@@ -32,14 +38,13 @@ body {
   gap: 1rem;
 }
 
+/* Hover effect for list elem within the nav elem */
 .nav li:hover {
   background-color: seagreen;
 }
 
+/* Hover effect for active list elem within the nav elem */
 .nav li:active {
   background-color: ghostwhite;
 }
 
-.nav-home {
-  font-size: 2rem;
-}

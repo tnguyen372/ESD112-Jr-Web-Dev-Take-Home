@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import '../index.css';
+import '../css/index.css';
 // Source: https://www.npmjs.com/package/html-react-parser
 import parse from 'html-react-parser';
 
@@ -110,13 +110,11 @@ const Feed = () => {
     const authorName = parsedAuthorString[1];
     // Return the author's name as a clickable button to display on frontend
     return (
-      <div className="author">
-        <Link to={`/author/${id}`}>
-          <button value={authorName} onClick={(event) => {handleAuthor(event, id)}}>
-            {authorName}
-          </button>
-        </Link>
-      </div>
+      <Link to={`/author/${id}`}>
+        <button className="author" value={authorName} onClick={(event) => {handleAuthor(event, id)}}>
+          {authorName}
+        </button>
+      </Link>
     );
   };
 
@@ -146,7 +144,7 @@ const Feed = () => {
       return (
       <div className="tags" key={index}>
         <Link to={`/tag/${tag}`}>
-          <button value={tag} onClick={handleTag}>{tag}</button>
+          <button className="button" value={tag} onClick={handleTag}>{tag}</button>
         </Link>
       </div>
       );
@@ -161,32 +159,44 @@ const Feed = () => {
     and tags, if any
   */
   const displayPhotos = photos.map((photo, item) => {
-    // Parse the nested HTML elems stored in the photo description property into JSX
-    const description = parse(photo.description);
+    /* 
+      Parse the nested HTML elems stored in the photo description property into JSX.
+      Exclude the image element nested inside the photo description to avoid duplicate images.
+      Replaces the excluded img element with a React fragment.
+      Sources: https://www.npmjs.com/package/html-react-parser under the 'replace and remove element'
+      section and https://reactjs.org/docs/fragments.html.
+    */
+    const description = parse(photo.description, {
+      // Use the img src attribute to match with the photo post media image and exclude it
+      // from rendering by replacing it with a fragment 
+      replace: ({ attribs }) => attribs && attribs.src === photo.media.m && <Fragment></Fragment>
+    });
     
     // Parse the author property string value to extract only the username
     const author = getAuthorInfo(photo.author, photo.author_id);
     
     // Initialize tag variable to empty string then reassign it a value of 'None' or a tag list
-    let tags = '';
+    
     // If photo post contains no tags, explicityly state to user there are no tags
-    if (photo.tags === '') {
-      tags = 'None';
-    }
-    // Otherwise split the entire tag string into separate tag button links to click on  
-    else {
-      tags = splitTags(photo.tags);
-    }
+    // if (photo.tags === '') {
+    //   tags = 'None';
+    // }
+    // // Otherwise split the entire tag string into separate tag button links to click on  
+    // else {
+    //   tags = splitTags(photo.tags);
+    // }
     // Return a list of photo cards that contain the photo, description, author, and applicable tags  
     return (
-      <div className="photos" key={item}>
+      <div className="photo-card" key={item}>
         {/* Image */}
-        {/* <div className="photo-content">
+        <div className="photo-content">
           <img src={photo.media.m} alt=""/>
-        </div> */}
+        </div>
         {/* Photo post description */}
         <div className="photo-content">
-          <h2>Description: {description}</h2>
+          <h2>Description:</h2>
+          <br />
+            {description}
         </div>
         {/* Photo post author */}
         <div className="photo-content">
@@ -194,7 +204,10 @@ const Feed = () => {
         </div>
         {/* Photo post tags */}
         <div className="photo-content">
-          <h3>Tags: {tags}</h3>
+          <h3>Tags:</h3>
+          <div className="tag-container">
+            {photo.tags === '' ? null : splitTags(photo.tags)}
+          </div>
         </div>
       </div>
     )

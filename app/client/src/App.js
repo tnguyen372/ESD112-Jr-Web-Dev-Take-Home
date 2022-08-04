@@ -1,14 +1,16 @@
+// Library dependencies and component imports
 import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
 import Home from './components/Home';
 import Feed from './components/Feed';
 import NotFound from './components/NotFound';
-import './App.css';
+import './css/App.css';
 
-
+// Beginning of entire app starts here
 const App = () => {
   return (
+    // Define the browser router component to define the routing and rendering of different components
     <BrowserRouter>
-      <nav id="nav">
+      <nav className="nav">
         <h1>Photo Gallery App</h1>
         { 
         /* 
@@ -30,6 +32,6 @@ const App = () => {
       </Routes>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

@@ -1,0 +1,139 @@
+/* Imports the Poppins font family from the Google Fonts API. Can change and play around with different ones later*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=VT323&display=swap');
+
+/* Styling for the overall container */
+.container {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* Styling for body elements */
+body {
+  margin: 20px;
+  font-family: 'Poppins';
+  color: #333;
+}
+
+/* Styling anchor link elements */
+a {
+  color: rgb(3, 196, 154);
+}
+
+/* Styling for the nav bar container */
+nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0 auto;
+  border-bottom: 1px solid #e2e2e2;
+  margin-bottom: 40px;
+}
+
+/* Styling for nav bar header */
+nav h1 {
+  margin-right: auto;
+}
+
+/* Styling for photo gallery to format each item into a 3 column grid */
+.photo-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Styling for photo description, author, tags */
+.photo-card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-items: flex-start;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  height: fit-content;
+  border: 5px solid;
+  border-color: #007c89;
+}
+
+/* Styling for photo description, author, tags */
+.photo-content {
+  display: inherit;
+  flex-direction: inherit;
+  margin: 0 auto;
+  justify-content: center;
+  padding-left: 5px;
+  padding-right: 5px;
+  align-items: center;
+}
+
+/* Styling for all images */
+img {
+  display: block;
+  width: 300px;
+  height: 300px;
+  
+}
+
+/* Styling for all buttons */
+.button {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  border: 0;
+  border-radius: 2px;
+  height: 36px;
+  line-height: 1.15;
+  font-size: 14px;
+  color: mintcream;
+  background: #007c89;
+  padding: 12px 24px;
+}
+
+/* Button hover effect */
+.buton:hover {
+  transition: all .1s ease;
+  box-shadow: 0 0 0 0 #fff, 0 0 0 3px #1de9b6;
+}
+
+/* Styling for author content */
+.author {
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 3px;
+  padding: 12px 24px;
+  border: 0;
+  color: mintcream;
+  background: #007c89;
+  line-height: 1.15;
+  font-size: 16px;
+}
+
+/* Author button hover effect */
+.author:hover {
+  transition: all .1s ease;
+  box-shadow: 0 0 0 0 #fff, 0 0 0 3px #1de9b6;
+}
+
+/* Styling for the tag container */
+.tag-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  width: inherit;
+  align-items: center;
+  align-content: center;
+  gap: 5px;
+  padding-top: 10px;
+}
+
+/* Styling for all tags */
+.tags {
+  display: inline-block;
+  gap: 10px;
+  padding: 10px;
+}
