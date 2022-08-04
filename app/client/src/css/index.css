@@ -8,6 +8,11 @@
   height: 100%;
 }
 
+.project-info {
+  text-align: left;
+  padding-left: 20em;
+}
+
 /* Styling for body elements */
 body {
   margin: 20px;
@@ -64,8 +69,10 @@ nav h1 {
   flex-direction: inherit;
   margin: 0 auto;
   justify-content: center;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   align-items: center;
 }
 

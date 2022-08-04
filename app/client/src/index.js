@@ -4,13 +4,10 @@ import './css/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Create the React DOM root node
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-/* 
-  Renders the entire react app into a browser router component
-  BrowserRouter provides us access to the browser's address bar, which can give us information 
-  about the URL parameters or navigate programmatically using the browser's built-in history stack
-*/
+// Render the React DOM root node and wrap the app within to run with strict typing
 root.render(
   <React.StrictMode>
     <App />
