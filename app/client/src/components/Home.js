@@ -6,7 +6,7 @@ import '../index.css';
 import parse from 'html-react-parser';
 
 const Home = () => {
-  // State handlers
+  // Photos state handler
   let [photos, setPhotos] = useState([]);
 
   /* 
@@ -27,7 +27,7 @@ const Home = () => {
         photos = [...response.data];
         // Populate the photos array with the copy of the Flickr photo objects
         setPhotos(photos);
-      })
+      })  // Catch any errors when calling the getPhotos endpoint
       .catch ((error) => {
         console.log(`Error status: ${error.status}`);
       });
@@ -49,12 +49,14 @@ const Home = () => {
     const parsedAuthorString = author.split(regex).filter((token) => { return token });
     // Get the author's name from the parsed author array
     const authorName = parsedAuthorString[1];
-    // Return the author's name to display on frontend
+    // Return the author's name as a clickable button to display on frontend
+    // The 'reloadDocument' prop in the Link component skips client side routing to give it the effect of <a href>
+    // Source: https://reactrouter.com/docs/en/v6/components/link
     return (
       <div className="author">
         <Link to={`/filter/${authorID}`} reloadDocument>
           <button>
-          {authorName}
+            {authorName}
           </button>
         </Link>
       </div>
@@ -71,8 +73,9 @@ const Home = () => {
     const tags = tagString.split(' ');
     // Return a list of tag button links
     return tags.map((tag, index) => {
-      // Returns a button link wrapped inside its own div. 
+      // Returns a clickable tag button link wrapped inside its own div. 
       // The 'reloadDocument' prop in the Link component skips client side routing to give it the effect of <a href>
+      // Source: https://reactrouter.com/docs/en/v6/components/link
       return (
       <div className="tags" key={index}>
         <Link to={`/filter/${tag}`} reloadDocument>
@@ -110,17 +113,19 @@ const Home = () => {
     // Return a list of photo cards that contain the photo, description, author, and applicable tags  
     return (
       <div className="photos" key={item}>
+        {/* Image */}
         <div className="photo-content">
           <img src={photo.media.m} alt=""/>
         </div>
+        {/* Photo post description */}
         <div className="photo-content">
-
           <h2>Description: {description}</h2>
-          
         </div>
+        {/* Photo post author */}
         <div className="photo-content">
           <h2>Author: {author}</h2>
         </div>
+        {/* Photo post tags */}
         <div className="photo-content">
           <h3>Tags: {tags}</h3>
         </div>
@@ -128,15 +133,15 @@ const Home = () => {
     )
   });
   
-  // When gallery component first mounts and is initially rendered, runs a callback function
+  // When home component first mounts and is initially rendered, runs a callback function
   // on all the functions contained within it
   useEffect(() => {
-    // Get all photos when the gallery component is initially rendered
+    // Get all photos when the home component is initially rendered
     // This will generate a side effect that depends on the results array
     getPhotos();
 
     /* 
-      Render the gallery page whenever any dependency value changes. 
+      Render the home page whenever any dependency value changes. 
       Without a dependency array, this component will infinitely loop
       In this case, an empty dependency array guarantees the getPhotos
       function runs only once. Any values inside the dependency array 
@@ -144,6 +149,7 @@ const Home = () => {
     */
   }, []);
 
+  // Renders the entire Home component here
   return (
     <div className="container">
       <h1>Welcome to the photo gallery. Enjoy your stay!</h1>
@@ -154,7 +160,6 @@ const Home = () => {
         </div>
       </main>
     </div>
-    
   );
 };
 
