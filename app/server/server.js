@@ -31,10 +31,14 @@ app.use(cors({
   Returns: Flickr feed JSON response data
 */
 app.get('/api/getPhotos', (req, res) => {
+  // Get any URL query parameters
+  // const author = req.params.id;
+  // const tags = req.params.tags;
+
   // Source: https://www.flickr.com/services/api/response.json.html under Callback Function section (Scroll all the way down to bottom page)
   // Appended additional parameter: 'nojsoncallback' set to a value of 1 because original API URL returned a function wrapper: 'jsonFlickrFeed'
   // Raw JSON is desired to send to the client, so parameter 'nojsoncallback' and a value of 1 removes 'jsonFlickrFeed' function wrapper
-  const FLICKR_URL = 'https://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1';
+  const FLICKR_URL = `https://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tagmode=any`;
   // Get the JSON data from Flickr to send over to client
   axios.get(FLICKR_URL)
     .then((response) => {
@@ -46,6 +50,39 @@ app.get('/api/getPhotos', (req, res) => {
     });
     
 });
+
+app.get('/author/:id', async function(req, res) {
+  // Get the author id to filter the photo feed by author
+  const authorID = req.params.id;
+
+  // const FLICKR_URL = `https://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&id=${author}&tags=${tags}&tagmode=any`;
+  const FLICKR_URL = `https://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&id=${authorID}&tagmode=any`;
+  // Get the JSON data from Flickr to send over to client
+  axios.get(FLICKR_URL)
+  .then((response) => {
+    // Send over the array of Flickr photo objects contained in the items property to the client
+    res.send(response.data.items);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+})
+
+app.get('/tag/:tag', async function(req, res) {
+  // Get the author id to filter the photo feed by author
+  const tag = req.params.tag;
+
+  const FLICKR_URL = `https://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1&tags=${tag}&tagmode=any`;
+  // Get the JSON data from Flickr to send over to client
+  axios.get(FLICKR_URL)
+  .then((response) => {
+    // Send over the array of Flickr photo objects contained in the items property to the client
+    res.send(response.data.items);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+})
 
 app.get('/', (req, res) => {
   res.send('Hello world!');
