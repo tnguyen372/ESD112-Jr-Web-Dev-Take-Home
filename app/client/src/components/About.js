@@ -26,6 +26,7 @@ const About = () => {
         <ol>
           <li>Open up 2 terminals.</li>
           <li>In 1 terminal cd to app/client and in the other terminal, cd to app/server.</li>
+          <li>Run 'npm i' or 'npm install' to install all project dependencies for frontend and backend.</li>
           <li>In the app/server directory, run 'npm run dev' to start up the express server.</li>
           <li>In the app/client directory, run 'npm start' to start up the client.</li>
           <li>Play around and click on authors and tags to change the photo feed.</li>
