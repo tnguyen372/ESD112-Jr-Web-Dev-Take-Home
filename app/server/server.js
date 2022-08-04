@@ -27,16 +27,16 @@ app.use(cors({
 /*
   Purpose: Grabs all the photos that the Flickr API endpoint provides. It is initially called upon when
   the React frontend first renders
-  Input: None
-  Output: Flickr Feed JSON response data
-  Error Messages: None
-  Author: Thomas Nguyen
+  Parameters: None
+  Returns: Flickr feed JSON response data
 */
 app.get('/api/getPhotos', (req, res) => {
   // Source: https://www.flickr.com/services/api/response.json.html under Callback Function section (Scroll all the way down to bottom page)
   // Appended additional parameter: 'nojsoncallback' set to a value of 1 because original API URL returned a function wrapper: 'jsonFlickrFeed'
   // Raw JSON is desired to send to the client, so parameter 'nojsoncallback' and a value of 1 removes 'jsonFlickrFeed' function wrapper
-  axios.get('https://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1')
+  const FLICKR_URL = 'https://www.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1';
+  // Get the JSON data from Flickr to send over to client
+  axios.get(FLICKR_URL)
     .then((response) => {
       // Send over the array of Flickr photo objects contained in the items property to the client
       res.send(response.data.items);
