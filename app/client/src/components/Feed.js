@@ -36,10 +36,14 @@ const Feed = () => {
         console.log(`Error status: ${error.status}`);
       });
   };
-  
+  /* 
+    Purpose: Call the author filter API endpoint to show a Flickr photo feed of a specific author
+    Parameters: None
+    Returns: A specific author's Flickr photo feed
+  */
   const getAuthorPhotos = () => {
     // Call the getPhotos endpoint to get all the photos stored in the Flickr public photo feed
-    axios.get(`/author/${authorID}`)
+    axios.get(`/api/author/${authorID}`)
       .then ((response) => {
         // If status wasn't ok, then alert of error before trying to update state
         if (response.status !== 200) {
@@ -54,10 +58,14 @@ const Feed = () => {
         console.log(`Error status: ${error.status}`);
       });
   };
-
+  /* 
+    Purpose: Call the tag filter API endpoint to show a Flickr photo feed of a specific tag
+    Parameters: None
+    Returns: A specific tag's Flickr photo feed
+  */
   const getTagPhotos = () => {
     // Call the getPhotos endpoint to get all the photos stored in the Flickr public photo feed
-    axios.get(`/tag/${tag}`)
+    axios.get(`/api/tag/${tag}`)
       .then ((response) => {
         // If status wasn't ok, then alert of error before trying to update state
         if (response.status !== 200) {
@@ -72,8 +80,11 @@ const Feed = () => {
         console.log(`Error status: ${error.status}`);
       });
   };
-
-  // Event handler function to set the author state
+  /* 
+    Purpose: Event handler function to set the author state
+    Parameters: Button click event containing the author the user clicked on and author ID
+    Returns: Nothing
+  */
   const handleAuthor = (event, id) => {
     // Set the author/authorID clicked by the user then reset the tag state
     setAuthor(event.target.value);
@@ -98,8 +109,6 @@ const Feed = () => {
     // Get the author's name from the parsed author array
     const authorName = parsedAuthorString[1];
     // Return the author's name as a clickable button to display on frontend
-    // The 'reloadDocument' prop in the Link component skips client side routing to give it the effect of <a href>
-    // Source: https://reactrouter.com/docs/en/v6/components/link
     return (
       <div className="author">
         <Link to={`/author/${id}`}>
@@ -111,7 +120,11 @@ const Feed = () => {
     );
   };
 
-  // Event handler function to set the tag state
+  /* 
+    Purpose: Event handler function to set the tag state
+    Parameters: Button click event containing the tag the user clicked on
+    Returns: Nothing
+  */
   const handleTag = (event) => {
     // Set the tag clicked by the user then reset the author/authorID state
     setTag(event.target.value);
@@ -130,8 +143,6 @@ const Feed = () => {
     // Return a list of tag button links
     return tags.map((tag, index) => {
       // Returns a clickable tag button link wrapped inside its own div. 
-      // The 'reloadDocument' prop in the Link component skips client side routing to give it the effect of <a href>
-      // Source: https://reactrouter.com/docs/en/v6/components/link
       return (
       <div className="tags" key={index}>
         <Link to={`/tag/${tag}`}>
